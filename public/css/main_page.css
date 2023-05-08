@@ -1,0 +1,13 @@
+body
+{
+    background-image: url(../resources/back_main_page.jpg); 
+    height: 100vh;
+    background-attachment: fixed; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+}
+p{
+    margin: 0px;
+    padding: 0px;
+}

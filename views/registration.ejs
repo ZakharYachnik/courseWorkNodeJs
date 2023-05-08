@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/registration.css">
+    <title>Регистрация</title>
+</head>
+<body>
+    <h1>Введите данные для регистрации</h1>
+  <div id="wrapper">
+    <form id="signin" method="post" action="/registration" autocomplete="off">
+        <% if (error !== '') { %>
+            <input type="text" id="user" class="errorInput" name="user" placeholder="<%= error %>" />
+          <% } else { %>
+            <input type="text" id="user" name="user" placeholder="login" />
+          <% } %>
+        <div class="info-icon"></div>
+        <div class="info-tooltip">Текст с правилами написания данных</div>  
+        <input type="password" id="password" name="password" placeholder="password" />
+        <input type="text" id="phone_number" name="phone_number" placeholder="phone_number" />
+        <input type="text" id="full_name" name="full_name" placeholder="FIO" />
+      <button type="submit">&#xf0da;</button>
+    </form>
+</body>
+</html>

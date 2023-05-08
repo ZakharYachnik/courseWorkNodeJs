@@ -1,0 +1,23 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация и Авторизация</title>
+  <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+  <h1>Войдите в аккаунт</h1>
+  <div id="wrapper">
+    <form id="signin" method="post" action="/login" autocomplete="off">
+      <input type="text" id="user" name="user" placeholder="login" />
+      <input type="password" id="pass" name="pass" placeholder="password" />
+      <button type="submit">&#xf0da;</button>
+      <p>Еще нет аккаунта? <a href="/registration">Регистрация</a></p>
+    </form>
+    <% if ( error !== '') { %>
+      <div class="error">
+        <p><%= error %></p>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>
