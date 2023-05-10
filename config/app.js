@@ -77,12 +77,38 @@ app.get('/login', (req, res) => {
 })
 
 app.get('/registration', (req, res) => {
-    res.render("./registration", { error: ''})
+    res.render("./registration", { errorLog: '', errorInput: ''})
 })
+
+const { validateUsername, validatePassword, validateFullName, validatePhoneNumber } = require('../public/script/validatorsReg.js');
 
 app.post('/registration', (req, res) => {
     const { user, password, phone_number, full_name } = req.body;
+    
+    // Валидация логина
+    const usernameError = validateUsername(user);
+    if (usernameError) {
+        return res.render("./registration", { errorLog: '', errorInput: usernameError});
+    }
 
+    // Валидация пароля
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+        return res.render("./registration", { errorLog: '', errorInput: passwordError});
+    }
+
+    // Валидация полного имени
+    const fullNameError = validateFullName(full_name);
+    if (fullNameError) {
+        return res.render("./registration", { errorLog: '', errorInput: fullNameError});
+    }
+
+    // Валидация номера телефона
+    const phoneNumberError = validatePhoneNumber(phone_number);
+    if (phoneNumberError) {
+        return res.render("./registration", { errorLog: '', errorInput: phoneNumberError});
+    }
+  
     // Проверяем, есть ли уже пользователь с таким логином
     connection.query('SELECT * FROM users WHERE username = ?', [user], (err, results) => {
         if (err) {
@@ -93,7 +119,7 @@ app.post('/registration', (req, res) => {
         if (results.length > 0) {
             // Если пользователь уже существует, выдаем ошибку
             const newUser = { username: user, password, phone_number, full_name };
-            res.render("./registration", { error: 'Логин занят'});
+            res.render("./registration", { errorLog: 'Логин Занят ', errorInput: ''});
         }
         else 
         {

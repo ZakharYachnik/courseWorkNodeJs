@@ -103,10 +103,10 @@ h1{
 	font-weight: 700;
 	font-size: 14px;
 	margin: 5px 0 0 0;
-  text-shadow: 0.4px 0.4px 0.4px rgb(170, 168, 168);
+  	text-shadow: 0.4px 0.4px 0.4px rgb(26, 25, 25);
 }
 #signin p > a{
-	color: rgb(93, 96, 101);
+	color: rgb(136, 138, 142);
 	text-decoration: none;
 }
 #signin p > a:hover{

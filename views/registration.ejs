@@ -11,8 +11,8 @@
     <h1>Введите данные для регистрации</h1>
   <div id="wrapper">
     <form id="signin" method="post" action="/registration" autocomplete="off">
-        <% if (error !== '') { %>
-            <input type="text" id="user" class="errorInput" name="user" placeholder="<%= error %>" />
+        <% if (errorLog !== '') { %>
+            <input type="text" id="user" class="errorInput" name="user" placeholder="<%= errorLog %>" />
           <% } else { %>
             <input type="text" id="user" name="user" placeholder="login" />
           <% } %>
@@ -21,5 +21,14 @@
         <input type="text" id="full_name" name="full_name" placeholder="FIO" />
       <button type="submit">&#xf0da;</button>
     </form>
+    <button class="little_button1 info" data-tooltip="* Логин - от 3 до 16 симловов, первые три обязательно латинские буквы!"><img src="/resources/info.png" alt="info"></button> 
+    <button class="little_button2 info" data-tooltip="* Пароль должен содержать как минимум одну заглавную букву, одну строчную букву, одну цифру и быть длиной не менее 8 символов."><img src="/resources/info.png" alt="info"></button> 
+    <button class="little_button3 info" data-tooltip="* Пример ввода номера телефона +375333305320"><img src="/resources/info.png" alt="info"></button> 
+    <button class="little_button4 info" data-tooltip="* ФИО должно содержать только буквы кириллицы и состоять из трех слов"><img src="/resources/info.png" alt="info"></button> 
+    <% if ( errorInput !== '') { %>
+      <div class="error">
+        <p><%= errorInput %></p>
+      </div>
+    <% } %>
 </body>
 </html>
