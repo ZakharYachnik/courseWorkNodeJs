@@ -4,9 +4,13 @@ function validateUsername(username) {
   }
   
   function validatePassword(password) {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{3,}$/;
-    console.log(regex.test(password))
-    return regex.test(password) ? '' : 'Неверный ввод пароля';
+    if (password.length < 7) {
+      return 'Неверный ввод пароля';
+    }
+
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    return hasUpperCase && hasNumber ? '' : 'Неверный ввод пароля';
   }
   
   

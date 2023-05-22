@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/publication.css">
+    <link rel="stylesheet" href="/css/headerFooter.css">
+    <link rel="stylesheet" href="/css/modal.css">
+    <link rel="shortcut icon" href="/resources/warning.png" type="image/x-icon">
+    <title>Publication</title>
+</head>
+<body>
+    <%- include('blocks/header') -%>
+    <div class="container-photo">
+        <img src="/resources/warning.png" id="warning-photo" alt="Warning">
+        <div class="text-container">
+          <p class="dearUser">Уважаемый пользователь</p>
+          <p class="warText">
+            Мы хотим обратить ваше внимание на важный момент. Если ваши объявления о продаже автомобилей содержат неверную или несоответствующую информацию, они могут быть удалены или заблокированы. Это мера, которая предотвращает мошеннические действия и защищает наших пользователей.
+            Пожалуйста, убедитесь, что вы вводите корректную и достоверную информацию о продаваемом автомобиле, включая модель, год выпуска, техническое состояние и другие важные данные. Если вы получаете жалобы на несоответствие данных в объявлении, мы будем вынуждены заблокировать ваш аккаунт.
+          </p>
+          <p class="thanks">Спасибо за понимание.</p>
+          <p class="respect">С уважением, Администрация сайта</p>
+        </div>
+      </div>
+    <h1>Подача объявления на продажу авто</h1>
+    <% if (error != '') { %>
+        <h3 class ="form-error"><%= error %></h3>
+    <% } %>
+        <form id="car-form" method="post" action="/publication" enctype="multipart/form-data">
+                    <div class="col form-container">
+                        <div class="form-group">
+                            <label for="make">Марка</label>
+                            <select id="make" name="make">
+                            <option value="">--Выберите марку--</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Nissan">Nissan</option>
+                            <option value="BMW">BMW</option>
+                            <option value="Mercedes-Benz">Mercedes-Benz</option>
+                            <option value="Ford">Ford</option>
+                            <option value="Chevrolet">Chevrolet</option>
+                            <option value="Audi">Audi</option>
+                            <option value="Hyundai">Hyundai</option>
+                            <option value="Volkswagen">Volkswagen</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="model">Модель</label>
+                            <input type="text" id="model" name="model" placeholder="Введите модель" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="year">Год выпуска</label>
+                            <input type="number" id="year" name="year" min="1900" max="2023" placeholder="Введите год выпуска">
+                        </div>
+                        <div class="form-group">
+                            <label for="body_type">Тип кузова</label>
+                            <select id="body_type" name="body_type">
+                            <option value="">--Выберите тип кузова--</option>
+                            <option value="Седан">Седан</option>
+                            <option value="Внедорожник">Внедорожник</option>
+                            <option value="Купе">Купе</option>
+                            <option value="Универсал">Универсал</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="engine_type">Тип двигателя</label>
+                            <select id="engine_type" name="engine_type">
+                            <option value="">--Выберите тип двигателя--</option>
+                            <option value="Бензиновый">Бензиновый</option>
+                            <option value="Дизельный">Дизельный</option>
+                            <option value="Электрический">Электрический</option>
+                            <option value="Гибридный">Гибридный</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="drive_type">Привод</label>
+                            <select id="drive_type" name="drive_type">
+                            <option value="">--Выберите привод--</option>
+                            <option value="Передний">Передний</option>
+                            <option value="Задний">Задний</option>
+                            <option value="Полный">Полный</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="transmission">Коробка передач</label>
+                            <select id="transmission" name="transmission">
+                                <option value="">--Выберите коробку передач--</option>
+                                <option value="Механическая">Механическая</option>
+                                <option value="Автоматическая">Автоматическая</option>
+                            </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="file">Фото автомобиля</label>
+                                <input type="file" id="file" name="file">
+                            </div>
+                    </div>
+
+                    <div class="col form-container">
+                        <div class="form-group form-group--price">
+                        <label for="price">Цена</label>
+                        <div class="input-group">
+                            <input type="number" id="price" name="price" placeholder="Введите цену" class="form-control">
+                            <div class="input-group-append">
+                            <select name="currency" id="currency" class="form-control">
+                                <option value="BYN">BYN</option>
+                                <option value="EUR">EUR</option>
+                                <option value="RUB">RUB</option>
+                                <option value="USD">USD</option>
+                            </select>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="form-group form-group--payment-method">
+                        <label for="payment_method">Способ оплаты</label>
+                        <select name="payment_method" id="payment_method" class="form-control">
+                            <option value="Картой">Картой</option>
+                            <option value="Наличные">Наличные</option>
+                            <option value="Криптовалюта">Криптовалюта</option>
+                        </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Описание</label>
+                            <textarea id="description" name="description" rows="5" placeholder="Введите описание"></textarea>
+                        </div>
+                        <button type="submit" id ="btnSub">Подать объявление</button>
+                    </div>
+        </form> 
+    <%- include('blocks/footer') -%>
+    <script src="/script/modal.js"></script>
+    <script>
+        var btnSub = document.querySelector('#btnSub');
+
+        btnSub.addEventListener('click', () =>{
+        const make = document.getElementById('make').value;
+        const model = document.getElementById('model').value;
+        const year = document.getElementById('year').value;
+        const body_type = document.getElementById('body_type').value;
+        const engine_type = document.getElementById('engine_type').value;
+        const drive_type = document.getElementById('drive_type').value;
+        const transmission = document.getElementById('transmission').value;
+        const price = document.getElementById('price').value;
+        const imgName = document.getElementById('file').value;
+        const currency = document.getElementById('currency').value;
+        const payment_method = document.getElementById('payment_method').value;
+
+        if (!make || !model || !year || !body_type || !engine_type || !drive_type || !transmission || !price || !currency || !payment_method || !imgName) {
+            console.log("Не все поля заполнены")
+        }
+        else 
+        {
+            const modal = new ItcModal({ 
+                title: '<h2 class ="H2">Ваше объявление успешно опубликовано</h2>', 
+                content: '<a class = "link" href = "/catalog">Хорошо</a>'
+            })
+            modal.show();
+        }
+        
+        });
+    </script>
+</body>
+</html>

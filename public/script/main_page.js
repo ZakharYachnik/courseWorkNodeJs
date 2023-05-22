@@ -24,4 +24,4 @@ function nextSlide() {
 slides[currentSlide].classList.add('active');
 
 // запускаем переключение слайдов каждые 3 секунды
-setInterval(nextSlide, 5000);
+setInterval(nextSlide, 4000);

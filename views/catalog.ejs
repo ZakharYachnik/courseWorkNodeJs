@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/headerFooter.css">
+    <link rel="stylesheet" href="/css/catalog.css">
+    <link rel="shortcut icon" href="/resources/warning.png" type="image/x-icon">
+    <title>Catalog</title>
+</head>
+<body>
+  <% if(user.isAdmin) {%>
+      <%- include('blocks/admin') -%>
+  <% } else { %>
+      <%- include('blocks/header') -%>
+  <% } %>
+    <div class="container-fluid main-div">
+        <div class="container filter-container">
+            <form id="filter-form" method="post" action="/filter">
+              <div class="row filter-row">
+                <div class="col-6 col-mark-price">
+                  <div class="filter-group">
+                    <label for="make-filter">Марка</label>
+                    <select id="make-filter" name="make-filter">
+                      <option value="">--Выберите марку--</option>
+                      <option value="Toyota">Toyota</option>
+                      <option value="Honda">Honda</option>
+                      <option value="Nissan">Nissan</option>
+                      <option value="BMW">BMW</option>
+                      <option value="Mercedes-Benz">Mercedes-Benz</option>
+                      <option value="Ford">Ford</option>
+                      <option value="Chevrolet">Chevrolet</option>
+                      <option value="Audi">Audi</option>
+                      <option value="Hyundai">Hyundai</option>
+                      <option value="Volkswagen">Volkswagen</option>
+                    </select>
+                  </div>
+                  <div class="filter-group">
+                    <label for="year-from-filter">Год выпуска, от</label>
+                    <input type="number" id="year-from-filter" name="year-from-filter" min="1900" max="2023" placeholder="Год выпуска, от">
+                  </div>
+                  <div class="filter-group">
+                    <label for="year-to-filter">Год выпуска, до</label>
+                    <input type="number" id="year-to-filter" name="year-to-filter" min="1900" max="2023" placeholder="Год выпуска, до">
+                  </div>
+                  <div class="filter-group">
+                    <label for="price-from-filter">Цена, от</label>
+                    <input type="number" id="price-from-filter" name="price-from-filter" placeholder="Цена, от">
+                  </div>
+                  <div class="filter-group">
+                    <label for="price-to-filter">Цена, до</label>
+                    <input type="number" id="price-to-filter" name="price-to-filter" placeholder="Цена, до">
+                  </div>
+                </div>
+
+                <div class="col-6 col-model-engine">
+                  <div class="filter-group">
+                    <label for="model-filter">Модель</label>
+                    <input type="text" id="model-filter" name="model-filter" placeholder="Введите модель" autocomplete="off">
+                  </div>
+                  <div class="filter-group">
+                    <label for="engine-type-filter">Тип двигателя</label>
+                    <select id="engine-type-filter" name="engine-type-filter">
+                      <option value="">--Выберите тип двигателя--</option>
+                      <option value="Бензиновый">Бензиновый</option>
+                      <option value="Дизельный">Дизельный</option>
+                      <option value="Электрический">Электрический</option>
+                      <option value="Гибридный">Гибридный</option>
+                    </select>
+                  </div>
+                  <div class="filter-group">
+                    <label for="drive-type-filter">Привод</label>
+                    <select id="drive-type-filter" name="drive-type-filter">
+                      <option value="">--Выберите привод--</option>
+                      <option value="Передний">Передний</option>
+                      <option value="Задний">Задний</option>
+                      <option value="Полный">Полный</option>
+                    </select>
+                  </div>
+                  <div class="filter-group">
+                    <label for="currency-type-filter">Валюта</label>
+                    <select name="currency-type-filter" id="currency-type-filter">
+                      <option value="">--Выберите валюту--</option>
+                      <option value="BYN">BYN</option>
+                      <option value="EUR">EUR</option>
+                      <option value="RUB">RUB</option>
+                      <option value="USD">USD</option>
+                  </select>
+                  </div>
+                  <div class="filter-group">
+                    <button type="submit">Применить фильтр</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div><% if ( numPublications == 0) { %>
+            <div class="msg">
+              <p>По данному запросу ничего не найдено</p>
+            </div>
+          <% } %>
+        <div class="container container-list" >
+            <ul class="list">
+            <% cars.forEach((car) => { %>
+                <li>
+                    <a href="/catalog/<%= car.id %>" class="no-style-link">
+                    <div class="row listRow" >
+                        <div class="col-4 imgSel">
+                            <img src="./uploads/<%= car.path %>" alt="фото машины" class ="carImg">
+                        </div>
+                        <div class="col-8">
+                            <div class="row row-cols-1">
+                                <div class="col titleH2">
+                                    <h2 class="model"><%= car.make %> <%= car.model %></h2>
+                                    <h2 class="price"><%= car.price %> <%= car.currency %></h2> 
+                                </div>
+                                <div class="row parametrs">
+                                    <div class="col-6">
+                                        <p>Год выпуска: <%= car.year %></p>
+                                        <p>Тип двигателя: <%= car.engine_type %></p> 
+                                         
+                                    </div>
+                                    <div class="col-6">
+                                        <p>Тип привода: <%= car.drive_type %></p>
+                                        <p>Метод оплаты: <%= car.payment_method %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </li>
+            <% }); %>
+            </ul>
+        </div>
+    </div>
+    <%- include('blocks/footer') -%>
+
+    <script src="/script/catalog.js"></script>
+</body>
+</html>

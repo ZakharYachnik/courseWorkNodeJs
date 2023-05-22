@@ -6,61 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main_page.css">
+    <link rel="stylesheet" href="/css/headerFooter.css">
+    <link rel="shortcut icon" href="/resources/warning.png" type="image/x-icon">
     <title>Main_Page</title>
 </head>
 <body>
-    <header>
-        <nav class="header_nav">
-          <ul class="header_ul">
-            <li class="header_li"><a href="/main_page" class="logo">CarSale</a></li>
-            <li class="header_li"><a href="/main_page" class="active">Главная</a></li>
-            <li class="header_li"><a href="/catalog" class="active">Каталог</a></li>
-            <li class="header_li"><a href="/publication" class="btn ad"><span class = "Boldd">+</span> Подать объявление</a></li>
-            <li class="header_li"><a href="/profile" class="btn profile">Профиль</a></li>
-          </ul>
-        </nav>
-      </header>
-      
+    <% if(user.isAdmin) {%>
+        <%- include('blocks/admin') -%>
+    <% } else { %>
+        <%- include('blocks/header') -%>
+    <% } %>
+    <marquee direction="left" scrollAmount="10">Есть деньги - покупай! Нужны деньги - продавай!</marquee>
     <div class="slideshow">
         <img src="/resources/slideShow1.jpg">
         <img src="/resources/slideShow2.jpg">
         <img src="/resources/slideShow3.jpg">
     </div>
-
-    <footer class="footer">
-        <div class="container">
-          <div class="footer__grid">
-            <div class="footer__column">
-              <h4 class="footer__title">О нас</h4>
-              <p class="footer__text">Мы компания, которая поможет вам, как найти автомобиль, так и продать. Наш слогон прост "Есть деньги - покупай. Нужны деньги - продавай!"</p>
-            </div>
-            <div class="footer__column">
-              <h4 class="footer__title">Контакты</h4>
-              <p class="footer__text"><i class="fas fa-map-marker-alt"></i> Минск, Беларусь</p>
-              <p class="footer__text"><i class="fas fa-phone"></i> +375 33 330-053-20</p>
-            </div>
-            <div class="footer__column">
-              <h4 class="footer__title">Социальные сети</h4>
-              <ul class="footer__social">
-                <li><a href="https://instagram.com/zaherushka?igshid=ZGUzMzM3NWJiOQ=="><i class="fab fa-instagram">instagram: @zaharushka</i></a></li>
-                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-              </ul>
-            </div>
-            <div class="footer__column">
-              <h4 class="footer__title">Навигация</h4>
-              <ul class="footer__nav">
-                <li><a href="#">Главная</a></li>
-                <li><a href="#">О нас</a></li>
-                <li><a href="#">Услуги</a></li>
-                <li><a href="#">Проекты</a></li>
-                <li><a href="#">Контакты</a></li>
-              </ul>
-            </div>
-          </div>
-          <p class="footer__copy">&copy; 2023 CarSale. Все права защищены.</p>
-        </div>
-      </footer>
-      
+    <marquee direction="right" scrollAmount="10">Есть деньги - покупай! Нужны деньги - продавай!</marquee>
+    <%- include('blocks/footer') -%>
     <script src="/script/main_page.js"></script>
 </body>
 </html>
